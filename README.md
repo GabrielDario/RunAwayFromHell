@@ -31,3 +31,7 @@ Feito em React Native - point click aonde o personagem começa no primeiro andar
  - OBJETOS será necessário para certas ações para subir de andar;
  - BANDID para aumentar o seu HP EM 20;
 ----------------------------------------------------
+OPÇÕES
+- Idioma
+- Som
+----------------------------------------------------
