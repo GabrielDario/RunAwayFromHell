@@ -1,11 +1,45 @@
-import { StyleSheet, Text, View, ImageBackground, Pressable, Image, Modal,Alert ,BackHandler } from 'react-native';
-import React, {useState} from 'react';
+import { StyleSheet, Text, View, ImageBackground, Pressable, Image, Modal, Alert, BackHandler ,
+  TouchableOpacity,Clipboard
+} from 'react-native';
+import React, { useState, useMemo } from 'react';
+import RadioGroup from 'react-native-radio-buttons-group';
 
 export default function App() {
+
+  const language = useMemo(() => ([
+    {
+      id: '1', // acts as primary key, should be unique and non-empty string
+      label: 'Português',
+      value: 'pt'
+    },
+    {
+      id: '2',
+      label: 'English',
+      value: 'en'
+    }
+  ]), []);
+  const sound = useMemo(() => ([
+    {
+      id: '1', // acts as primary key, should be unique and non-empty string
+      label: 'Ligado',
+      value: 'on'
+    },
+    {
+      id: '2',
+      label: 'Desligado',
+      value: 'off'
+    }
+  ]), []);
   const onPressFunction = (req, res) => {
     console.log('OnPress')
   }
-  const [modalVisible, setModalVisible] = useState(false);
+
+  const [selectLanguage, setSelectLanguage] = useState();
+  const [selectSound, setSelectSound] = useState();
+
+  const [modalApoiar, setModalApoiar] = useState(false);
+  const [modalCreditos, setModalCreditos] = useState(false);
+  const [modalOpcoes, setModalOpcoes] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -18,55 +52,114 @@ export default function App() {
           <Pressable onPress={onPressFunction} style={styles.btn}>
             <Text style={styles.textBtn}>Novo Jogo</Text>
           </Pressable>
-          <Pressable onPress={onPressFunction} style={styles.btn}>
+
+
+          {/* MODAL APOIAR */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalApoiar}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+              setModalApoiar(!modalApoiar);
+            }}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Apoiar</Text>
+                <Text></Text>
+                <Text>CPF pixx</Text>
+                <TouchableOpacity onPress={() => Clipboard.setString('11236613910')}>
+                  <View>
+                    <Text style={{ color: 'blue'}}>
+                      11236613910
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <Text></Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalApoiar(!setModalApoiar)}>
+                  <Text style={styles.textStyle}>x</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+          {/* FIM DO MODAL APOIAR */}
+
+          <Pressable
+            style={[styles.btn]}
+            onPress={() => setModalApoiar(!modalApoiar)}>
             <Text style={styles.textBtn}>Apoiar</Text>
           </Pressable>
           <Pressable onPress={onPressFunction} style={styles.btn}>
             <Text style={styles.textBtn}>Ranking</Text>
           </Pressable>
 
-           {/* MODAL OPÇÕES */}
-           <Modal
+
+          {/* MODAL OPÇÕES */}
+          <Modal
             animationType="slide"
             transparent={true}
-            visible={modalVisible}
+            visible={modalOpcoes}
             onRequestClose={() => {
               Alert.alert('Modal has been closed.');
-              setModalVisible(!modalVisible);
+              setModalOpcoes(!modalOpcoes);
             }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>OPCOESS</Text>
+                <Text style={styles.modalText}>Idioma: </Text>
+                <RadioGroup
+                  radioButtons={language}
+                  onPress={setSelectLanguage}
+                  selectedId={selectLanguage}
+                />
+                <Text></Text>
+                <Text style={styles.modalText}>Som : </Text>
+                <RadioGroup
+                  radioButtons={sound}
+                  onPress={setSelectSound}
+                  selectedId={selectSound}
+                />
+                <Text></Text>
+
+                <Pressable
+                  style={[styles.button]}
+                  onPress={() => setModalOpcoes(!modalOpcoes)}>
+                  <Text style={styles.textStyle}>Salvar</Text>
+                </Pressable>
+                <Text></Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}>
+                  onPress={() => setModalOpcoes(!modalOpcoes)}>
                   <Text style={styles.textStyle}>x</Text>
                 </Pressable>
+
+
               </View>
             </View>
           </Modal>
           {/* FIM DO MODAL OPÇÕES */}
           <Pressable
-              style={[styles.btn]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textBtn}>Opções</Text>
-            </Pressable>
+            style={[styles.btn]}
+            onPress={() => setModalOpcoes(!modalOpcoes)}>
+            <Text style={styles.textBtn}>Opções</Text>
+          </Pressable>
 
           {/* MODAL CRÉDITOS */}
           <Modal
             animationType="slide"
             transparent={true}
-            visible={modalVisible}
+            visible={modalCreditos}
             onRequestClose={() => {
               Alert.alert('Modal has been closed.');
-              setModalVisible(!modalVisible);
+              setModalCreditos(!modalCreditos);
             }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>Feito por Gabriel Dario da Rosa</Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}>
+                  onPress={() => setModalCreditos(!setModalCreditos)}>
                   <Text style={styles.textStyle}>x</Text>
                 </Pressable>
               </View>
@@ -75,11 +168,11 @@ export default function App() {
           {/* FIM DO MODAL CRÉDITOS */}
 
           <Pressable
-              style={[styles.btn]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textBtn}>Créditos</Text>
-            </Pressable>
-          <Pressable onPress={()=> BackHandler.exitApp()} style={styles.btn}>
+            style={[styles.btn]}
+            onPress={() => setModalCreditos(!modalCreditos)}>
+            <Text style={styles.textBtn}>Créditos</Text>
+          </Pressable>
+          <Pressable onPress={() => BackHandler.exitApp()} style={styles.btn}>
             <Text style={styles.textBtn}>Sair</Text>
           </Pressable>
         </View>
@@ -117,7 +210,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderWidth: 2,
     borderColor: 'white',
-  }, 
+  },
   centeredView: {
     flex: 1,
     justifyContent: 'center',

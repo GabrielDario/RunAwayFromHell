@@ -11,7 +11,7 @@ Feito em React Native - point click aonde o personagem começa no primeiro andar
     - Jogar 
     - Doações : PAYPAL e Pix
     - Ranking : Os 10 melhores com a melhores pontuações
-    - Opções : Idioma
+    - Opções : Idioma e som
     - Créditos : Mostrar quem fez
     - Sair
 ----------------------------------------------------
