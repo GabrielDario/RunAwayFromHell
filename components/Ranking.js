@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image ,Pressable} from 'react-native';
 import React, { useState, useMemo, useEffect } from 'react';
 import { DataTable } from 'react-native-paper';
 
@@ -10,28 +10,70 @@ export function Ranking({ navigation }) {
   const [items] = useState([
     {
       key: 1,
-      name: 'Cupcake',
-      calories: 356,
-      fat: 16,
+      place: '1º',
+      name: "Jeorge",
+      score: 16,
     },
     {
       key: 2,
-      name: 'Eclair',
-      calories: 262,
-      fat: 16,
+      place: '2º',
+      name: "Henrique",
+      score: 16,
     },
     {
       key: 3,
-      name: 'Frozen yogurt',
-      calories: 159,
-      fat: 6,
+      place: '3º',
+      name: "Anderson",
+      score: 6,
     },
     {
       key: 4,
-      name: 'Gingerbread',
-      calories: 305,
-      fat: 3.7,
+      place: '4º',
+      name: "Paulo",
+      score: 6.4,
     },
+    ,
+    {
+      key: 5,
+      place: '5º',
+      name: "João",
+      score: 4.3,
+    }
+    ,
+    {
+      key: 6,
+      place: '6º',
+      name: "Lucas",
+      score: 1.7,
+    }
+    ,
+    {
+      key: 7,
+      place: '7º',
+      name: "Thaigo",
+      score: 3.8,
+    }
+    ,
+    {
+      key: 8,
+      place: '8º',
+      name: "Vinicus",
+      score: 3.0,
+    }
+    ,
+    {
+      key: 9,
+      place: '9º',
+      name: "José",
+      score: 4.7,
+    }
+    ,
+    {
+      key: 10,
+      place: '10º',
+      name: "Pedro",
+      score: 3.7,
+    }
   ]);
 
   useEffect(() => {
@@ -47,22 +89,31 @@ export function Ranking({ navigation }) {
         />
         <View>
           <Text style={styles.title}>Ranking</Text>
+          <View style={styles.center}>
+          <Pressable  onPress={() => navigation.navigate('HomeScreen')} style={styles.btn}>
+          <Image
+            style={styles.close}
+            source={require('../assets/back.png')}
+          />
+          </Pressable>
+          </View>
+       
           <DataTable>
             <DataTable.Header style={styles.tableHeader}>
-              <DataTable.Title style={styles.text}>Dessert</DataTable.Title>
-              <DataTable.Title numeric>Calories</DataTable.Title>
-              <DataTable.Title numeric>Fat</DataTable.Title>
+              <DataTable.Title style={styles.text}>Lugar</DataTable.Title>
+              <DataTable.Title >Usuário</DataTable.Title>
+              <DataTable.Title numeric>Pountuação</DataTable.Title>
             </DataTable.Header>
 
             {items.map((item) => (
               <DataTable.Row style={styles.cont} key={item.key}>
-                <DataTable.Cell>{item.name}</DataTable.Cell>
-                <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-                <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+                <DataTable.Cell>{item.place}</DataTable.Cell>
+                <DataTable.Cell numeric>{item.name}</DataTable.Cell>
+                <DataTable.Cell numeric>{item.score}</DataTable.Cell>
               </DataTable.Row>
             ))}
 
-           
+
           </DataTable>
         </View>
 
@@ -81,7 +132,14 @@ const styles = StyleSheet.create({
   },
   logoImg: {
     top: 50,
-
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  close: {
+    width: 50,
+    height: 50,
   },
   title: {
     fontWeight: 'bold',
@@ -93,12 +151,12 @@ const styles = StyleSheet.create({
   tableHeader: {
     backgroundColor: '#DCDCDC',
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: 'red',
     fontColor: 'red',
   },
   cont: {
     borderWidth: 2,
-    borderColor: 'blue',
+
     backgroundColor: '#DCDCDC',
 
   },
