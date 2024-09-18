@@ -19,7 +19,7 @@ function App() {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          title: 'Memórias',
+          title: 'HomeScreen',
           headerStyle: {
             backgroundColor: 'rgb(148, 37, 235)',
           },
@@ -30,7 +30,7 @@ function App() {
         name="Ranking"
         component={Ranking}
         options={{
-          title: 'Adicionar nova memória',
+          title: 'Ranking',
           headerStyle: {
             backgroundColor: 'rgb(148, 37, 235)',
           },
