@@ -49,7 +49,7 @@ import { StyleSheet, Text, View, ImageBackground, Pressable, Image, Modal, Alert
             source={require('../assets/logo.png')}
           />
           <View style={styles.menus}>
-            <Pressable onPress={onPressFunction} style={styles.btn}>
+          <Pressable  onPress={() => navigation.navigate('Floor01')} style={styles.btn}>
               <Text style={styles.textBtn}>Novo Jogo</Text>
             </Pressable>
   
