@@ -1,27 +1,66 @@
-import { StyleSheet, Text, View, ImageBackground, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image, Pressable,Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 
 export function Floor01({ navigation }) {
 
   const [room, setRoom] = useState(1);
+  const createTwoButtonAlert = () =>
+    Alert.alert('Ir para o norte?', 'Confirmar?', [
+      {
+        text: 'Cancelar',
+        onPress: () => console.log('Ação cancelada'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => console.log('OK Pressed')},
+    ]);
 
   const north = () => {
-    console.log('Nort!');
+    createTwoButtonAlert();
+    if (room == 1) {
+      death();
+    } else {
+      console.log('Nada aqui')
+    }
   };
 
   const south = () => {
-    console.log('South!');
+    console.log('Sul!');
+
+    if (room == 1) {
+      console.log('Proximo andar!')
+    } else {
+      death();
+    }
   };
 
   const east = () => {
-    console.log('East!');
+    if (room == 1) {
+      console.log('Nada aqui!');
+    } else {
+      setRoom(1);
+      changeRoom();
+    }
   };
 
   const west = () => {
-    console.log('West!');
-  };
 
+    if (room == 1) {
+      setRoom(2);
+      changeRoom()
+    } else {
+      console.log('Nada aqui!');
+    }
+
+  };
+  const changeRoom = () => {
+    console.log('Você foi para sala ' + room);
+  }
+
+  const death = () => {
+    console.log('Você morreu!');
+    setRoom(1);
+  }
   return (
 
     <View style={styles.container}>
@@ -41,7 +80,7 @@ export function Floor01({ navigation }) {
         </Pressable>
 
         <Pressable onPress={south} style={[styles.imagem, styles.bottomImage]} >
-          <Image source={require('../img/doorS.png')} style={styles.imagem}/>
+          <Image source={require('../img/doorS.png')} style={styles.imagem} />
         </Pressable>
         <Pressable onPress={east} style={[styles.imagem, styles.rightImage]} >
           <Image source={require('../img/doorE.png')} style={styles.imagem} />
