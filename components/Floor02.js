@@ -1,10 +1,8 @@
 import { StyleSheet, Text, View, ImageBackground, Image, Pressable, Alert, Modal } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { Acoes } from '../path/Acoes.js';
 
-import { aDireita, aEsquerda, aSul, aNorte, morte, nothing, changeRoom ,nextFloor} from '../path/Acoes.js';
 
-export function Floor01({ navigation }) {
+export function Floor02({navigation}) {
   const [openModal, setOpenModal] = useState(false); //MODAL CONFIRMAR
   const [room, setRoom] = useState(1);
 
@@ -13,54 +11,62 @@ export function Floor01({ navigation }) {
   };
 
   const handleConfirm = (direction) => {
-    if (direction == 'left') {
-      if (room == 1) {
-        changeRoom(2)
-        setRoom(2)
-      } else {
-        nothing();
-      }
-    }
-    if (direction == 'right') {
-      if (room == 1) {
-        nothing()
-      } else {
-        changeRoom(1);
-        setRoom(1)
-      }
-    }
-    if (direction == 'north') {
-      if (room == 1) {
-        morte();
-      } else {
-        nothing();
-      }
-    }
-    if (direction == 'south') {
-      if (room == 1) {
-        nextFloor(2);
-        navigation.navigate('Floor02')
-      } else {
-        morte();
-        setRoom(1)
-      }
-    }
+    if(direction == 'left') {
+      console.log('INDO PARA ESQUERDA')
+    }else if(direction == 'right'){
+      console.log('INDO PARA DIREITA')
 
+    }else if(direction == 'north'){
+      console.log('INDO PARA NORTE')
+    }else{
+      console.log('SUL')
+    }
+  
     setOpenModal(false);  // Fecha o modal após a confirmação
   };
 
   const handleCancel = () => {
-    setOpenModal(false);
+    setOpenModal(false);  
+  };
+
+  const north = (n) => {
+    if (room == 1) {
+      death();
+    } else {
+      console.log('Nada aqui');
+    }
+  };
+
+  const south = () => {
+    console.log('Sul!');
+
+    if (room == 1) {
+      console.log('Proximo andar!')
+    } else {
+      death();
+    }
+  };
+
+  const east = () => {
+  };
+
+  const west = async () => {
+    console.log('WEST!')
+
   };
 
 
+  const death = () => {
+    console.log('Você morreu!');
+    setRoom(1);
+  }
   return (
 
     <View style={styles.container}>
 
       <ImageBackground source={require('../img/Floor01.png')} resizeMode="cover">
         <View>
-          <Text style={styles.title}>Andar : <Text style={styles.subtitle}>01/10</Text> </Text>
+          <Text style={styles.title}>Andar : <Text style={styles.subtitle}>02/10</Text> </Text>
           <Text style={styles.title}>Sala : <Text style={styles.subtitle}>{room}</Text></Text>
           {/* <Text style={styles.title}>{direction ? <Text>{direction}</Text> : <Text>direction</Text>}</Text> */}
 
@@ -80,8 +86,8 @@ export function Floor01({ navigation }) {
           style={[styles.imagem, styles.rightImage]} >
           <Image source={require('../img/doorE.png')} style={styles.imagem} />
         </Pressable>
-        <Pressable onPress={() => handlePress(direction = 'left')}
-          style={[styles.imagem, styles.leftImage]} >
+        <Pressable onPress={() => handlePress(direction = 'left')} 
+        style={[styles.imagem, styles.leftImage]} >
           <Image source={require('../img/doorO.png')} style={styles.imagem} />
         </Pressable>
 
@@ -97,11 +103,11 @@ export function Floor01({ navigation }) {
             }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Deseja abrir essa porta?</Text>
+                <Text style={styles.modalText}>Deseja abrir portaa?</Text>
                 <Pressable
                   style={[styles.button, styles.buttonConfirm]}
                   onPress={() => handleConfirm(direction)}>
-                  <Text style={styles.textStyle}>SIM</Text>
+                  <Text style={styles.textStyle}>OK</Text>
                 </Pressable>
                 <Text></Text>
                 <Pressable

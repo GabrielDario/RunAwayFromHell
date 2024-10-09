@@ -34,4 +34,7 @@ Feito em React Native - point click aonde o personagem começa no primeiro andar
 OPÇÕES
 - Idioma
 - Som
+- Botar moto dinamico
 ----------------------------------------------------
+Daily - Problema useState 
+Apenas trocar de sala caso confirmar!

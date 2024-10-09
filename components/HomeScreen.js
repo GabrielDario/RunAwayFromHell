@@ -30,9 +30,7 @@ import { StyleSheet, Text, View, ImageBackground, Pressable, Image, Modal, Alert
         value: 'off'
       }
     ]), []);
-    const onPressFunction = (req, res) => {
-      console.log('OnPress')
-    }
+
   
     const [selectLanguage, setSelectLanguage] = useState();
     const [selectSound, setSelectSound] = useState();
