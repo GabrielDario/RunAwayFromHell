@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, ImageBackground, Image, Pressable, Alert, Modal
 import React, { useState } from 'react';
 
 
-export function ModelRoom({ floor ,background}) {
+export function ModelRoom({ floor, background }) {
     const [openModal, setOpenModal] = useState(false); //MODAL CONFIRMAR
     const [room, setRoom] = useState(1);
 
@@ -54,11 +54,10 @@ export function ModelRoom({ floor ,background}) {
     return (
         <View style={styles.container}>
 
-      <ImageBackground source={background} resizeMode="cover"> {/* Corrigido */}
+            <ImageBackground source={background} resizeMode="cover"> 
                 <View>
                     <Text style={styles.title}>Andar : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
                     <Text style={styles.title}>Sala : <Text style={styles.subtitle}>{room}</Text></Text>
-                    {/* <Text style={styles.title}>{direction ? <Text>{direction}</Text> : <Text>direction</Text>}</Text> */}
 
                     <View style={styles.fundo}>
                         <Image source={require('../img/caractherFront.png')} style={styles.caracter} />
