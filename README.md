@@ -36,5 +36,7 @@ OPÇÕES
 - Som
 - Botar moto dinamico
 ----------------------------------------------------
-Daily - Problema useState 
-Apenas trocar de sala caso confirmar!
+Daily 
+ Padronizar
+ - Ajetar a tela para todos os celulares e Webq
+Linguagem e Tela para todos os andares
