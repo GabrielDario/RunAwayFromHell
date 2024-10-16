@@ -37,6 +37,7 @@ OPÇÕES
 - Botar moto dinamico
 ----------------------------------------------------
 Daily 
+Proximo dia - Ajeitar nextFloor - separar lógica por sala dos andares
  Padronizar
  - Ajetar a tela para todos os celulares e Webq
 Linguagem e Tela para todos os andares
