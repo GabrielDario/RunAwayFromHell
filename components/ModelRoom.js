@@ -1,15 +1,6 @@
-import { StyleSheet, Text, View, ImageBackground, Image, Pressable, Alert, Modal } from 'react-native';
-
-export const ModelRoom = ({ handleConfirm ,background,floor,room,openModal,setOpenModal}) => {
-
-    const handlePress = () => {
-        setOpenModal(true);
-    };
-
-
-    const handleCancel = () => {
-        setOpenModal(false);
-    };
+import { StyleSheet, Text, View, ImageBackground, Image, Pressable } from 'react-native'; 
+import { handleConfirm } from '../components/Floor01.js'; 
+export const ModelRoom = ({background,floor, room,handleConfirm}) => {
 
     return (
         <View style={styles.container}>
@@ -24,51 +15,22 @@ export const ModelRoom = ({ handleConfirm ,background,floor,room,openModal,setOp
                     </View>
                 </View>
 
-                <Pressable onPress={() => handlePress(direction = 'north')} style={[styles.imagem, styles.topImage]} >
+                <Pressable onPress={() => handleConfirm(direction = 'north')} style={[styles.imagem, styles.topImage]} >
                     <Image source={require('../img/doorN.png')} style={styles.imagem} />
                 </Pressable>
 
-                <Pressable onPress={() => handlePress(direction = 'south')} style={[styles.imagem, styles.bottomImage]} >
+                <Pressable onPress={() => handleConfirm(direction = 'south')} style={[styles.imagem, styles.bottomImage]} >
                     <Image source={require('../img/doorS.png')} style={styles.imagem} />
                 </Pressable>
-                <Pressable onPress={() => handlePress(direction = 'right')}
+                <Pressable onPress={() => handleConfirm(direction = 'right')}
                     style={[styles.imagem, styles.rightImage]} >
                     <Image source={require('../img/doorE.png')} style={styles.imagem} />
                 </Pressable>
-                <Pressable onPress={() => handlePress(direction = 'left')}
+                <Pressable onPress={() => handleConfirm(direction = 'left')}
                     style={[styles.imagem, styles.leftImage]} >
                     <Image source={require('../img/doorO.png')} style={styles.imagem} />
                 </Pressable>
-
-                {/* //MODAL */}
-                <View style={styles.centeredView}>
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={openModal}
-                        onRequestClose={() => {
-                            Alert.alert('Modal has been closed.');
-                            setOpenModal(!openModal);
-                        }}>
-                        <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
-                                <Text style={styles.modalText}>Deseja abrir essa porta?</Text>
-                                <Pressable
-                                    style={[styles.button, styles.buttonConfirm]}
-                                    onPress={() => handleConfirm(direction)}>
-                                    <Text style={styles.textStyle}>SIM</Text>
-                                </Pressable>
-                                <Text></Text>
-                                <Pressable
-                                    style={[styles.button, styles.buttonCancel]}
-                                    onPress={handleCancel}>
-                                    <Text style={styles.textStyle}>Cancelar !</Text>
-                                </Pressable>
-                            </View>
-                        </View>
-                    </Modal>
-
-                </View>
+               
             </ImageBackground>
         </View>
     )

@@ -5,10 +5,8 @@ import { death, changeRoom, nothing, nextFloor } from '../path/Actions.js'
 
 export function Floor01({navigation}) {
   const [room, setRoom] = useState(1);
-  const [openModal, setOpenModal] = useState(false); //MODAL CONFIRMAR
   let floor = 1;
   let background = require("../img/Floor01.png");
-
 
 
   const handleConfirm = (direction) => {
@@ -44,17 +42,14 @@ export function Floor01({navigation}) {
         setRoom(1)
       }
     }
-    setOpenModal(false);  // Fecha o modal após a confirmação
   };
 
   return (
     <ModelRoom
       floor={floor}
-      handleConfirm={handleConfirm}
-      openModal={openModal}
-      setOpenModal={setOpenModal}
       background={background}
       room={room}
+      handleConfirm={handleConfirm}
     />
   );
 }
