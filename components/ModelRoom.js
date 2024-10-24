@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, ImageBackground, Image, Pressable } from 'react-native'; 
-import { handleConfirm } from '../components/Floor01.js'; 
 export const ModelRoom = ({background,floor, room,handleConfirm}) => {
 
     return (

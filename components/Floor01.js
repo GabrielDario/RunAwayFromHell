@@ -23,7 +23,7 @@ export function Floor01({navigation}) {
         nothing()
       } else {
         changeRoom(1);
-        setRoom(1)
+        setRoom(1);
       }
     }
     if (direction == 'north') {

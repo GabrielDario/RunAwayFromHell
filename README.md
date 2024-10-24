@@ -37,8 +37,11 @@ OPÇÕES
 - Botar moto dinamico
 ----------------------------------------------------
 Daily 
-Proximo dia - Tirar confirmação e deixar dinamico
+- Fazendo sala dois
 
+- Fazer
+   Animação do boneco
+   
  Padronizar
  - Ajetar a tela para todos os celulares e Webq
 Linguagem e Tela para todos os andares
