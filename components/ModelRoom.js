@@ -1,35 +1,68 @@
-import { StyleSheet, Text, View, ImageBackground, Image, Pressable } from 'react-native'; 
-export const ModelRoom = ({background,floor, room,handleConfirm}) => {
+import { StyleSheet, Text, View, ImageBackground, Image, Pressable, Modal } from 'react-native'
+import { useState } from 'react';
 
+export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase }) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [openRoom, setOpenRoom] = useState(false);
+    const handleOkPress = (direction) => {
+        console.log('MODEL: ' + openRoom)
+        if(direction == 'south' && room == 1) {
+            console.log('SUBIU!')
+            setOpenRoom(true)
+            handleConfirm(direction,openRoom)
+        }
+    };
     return (
+
         <View style={styles.container}>
 
-            <ImageBackground source={background} resizeMode="cover"> 
+            <ImageBackground source={background} resizeMode="cover">
                 <View>
                     <Text style={styles.title}>Andar : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
-                    <Text style={styles.title}>Sala : <Text style={styles.subtitle}>{room}</Text></Text>
-
+                    <Text style={styles.title}>Sala: <Text style={styles.subtitle}>{room}</Text></Text>
                     <View style={styles.fundo}>
                         <Image source={require('../img/caractherFront.png')} style={styles.caracter} />
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisible}
+                            onRequestClose={() => {
+                                setModalVisible(!modalVisible);
+                            }}>
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                    <Text style={styles.modalText}>{actionPhrase}</Text>
+                                    <Pressable
+                                        style={[styles.button, styles.buttonClose]}
+                                        onPress={() => { handleOkPress('south'); setModalVisible(!modalVisible) }}
+                                        >
+                                        <Text style={styles.textStyle}>OK</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
+                        </Modal>
                     </View>
                 </View>
 
-                <Pressable onPress={() => handleConfirm(direction = 'north')} style={[styles.imagem, styles.topImage]} >
+                <Pressable onPress={() => { handleConfirm('north'); setModalVisible(true) }}
+                    style={[styles.imagem, styles.topImage]} >
                     <Image source={require('../img/doorN.png')} style={styles.imagem} />
                 </Pressable>
 
-                <Pressable onPress={() => handleConfirm(direction = 'south')} style={[styles.imagem, styles.bottomImage]} >
+                <Pressable onPress={() => { handleOkPress('south'); setModalVisible(true); }}
+                    style={[styles.imagem, styles.bottomImage]} >
                     <Image source={require('../img/doorS.png')} style={styles.imagem} />
                 </Pressable>
-                <Pressable onPress={() => handleConfirm(direction = 'right')}
+
+                <Pressable onPress={() => { handleConfirm('right'); setModalVisible(true) }}
                     style={[styles.imagem, styles.rightImage]} >
                     <Image source={require('../img/doorE.png')} style={styles.imagem} />
                 </Pressable>
-                <Pressable onPress={() => handleConfirm(direction = 'left')}
+                <Pressable onPress={() => { handleConfirm('left'); setModalVisible(true) }}
                     style={[styles.imagem, styles.leftImage]} >
                     <Image source={require('../img/doorO.png')} style={styles.imagem} />
                 </Pressable>
-               
+
             </ImageBackground>
         </View>
     )
@@ -110,11 +143,8 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 2,
     },
-    buttonConfirm: {
-        backgroundColor: '#2196F3',
-    },
-    buttonCancel: {
-        backgroundColor: 'red',
+    buttonClose: {
+        backgroundColor: 'green',
     },
     textStyle: {
         color: 'white',

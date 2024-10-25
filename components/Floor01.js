@@ -1,45 +1,48 @@
-import { ModelRoom } from './ModelRoom.js';
+import { ModelRoom, setModalVisible,modalVisible ,openRoom} from './ModelRoom.js';
 import React, { useState } from 'react';
-import { death, changeRoom, nothing, nextFloor } from '../path/Actions.js'
 
 
 export function Floor01({navigation}) {
   const [room, setRoom] = useState(1);
+  const [actionPhrase, setActionPhrase] = useState("NULL");
   let floor = 1;
   let background = require("../img/Floor01.png");
 
 
-  const handleConfirm = (direction) => {
+  const handleConfirm = (direction, openRoom) => {
+    console.log('FLOOR1: ' + openRoom)
     if (direction == 'left') {
       if (room == 1) {
-        changeRoom(2)
         setRoom(2)
+        setActionPhrase("Você estando indo para a sala 2");
       } else {
-        nothing();
+        setActionPhrase("Não há nada aqui")
       }
     }
     if (direction == 'right') {
       if (room == 1) {
-        nothing()
+        setActionPhrase("Não há nada aqui")
       } else {
-        changeRoom(1);
         setRoom(1);
+        setActionPhrase("Você estando indo para a sala 1");
       }
     }
     if (direction == 'north') {
       if (room == 1) {
-        death();
+        setActionPhrase("Você morreu e foi para sala 1");
       } else {
-        nothing();
+        setActionPhrase("Não há nada aqui");
       }
     }
-    if (direction == 'south') {
-      if (room == 1) {
-        nextFloor(2);
-        navigation.navigate('Floor02')
+      if (direction == 'south') {
+        if (room == 1) {
+          setActionPhrase("VOCÊ CONSEGUIU ACHAR A PORTA! VOCÊ VAI PARA O PRÓXIMO ANDAR");
+          if(openRoom == true) {
+            navigation.navigate('Floor02')
+          }
       } else {
-        death();
         setRoom(1)
+        setActionPhrase("VOCÊ FOI MORTO E FOI PARA SALA 1");
       }
     }
   };
@@ -50,6 +53,10 @@ export function Floor01({navigation}) {
       background={background}
       room={room}
       handleConfirm={handleConfirm}
+      setModalVisible={setModalVisible}
+      modalVisible={modalVisible}
+      actionPhrase={actionPhrase}
+      openRoom={openRoom}
     />
   );
 }

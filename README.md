@@ -37,11 +37,15 @@ OPÇÕES
 - Botar moto dinamico
 ----------------------------------------------------
 Daily 
-- Fazendo sala dois
+- Trocando de página ao clicar okay...
 
 - Fazer
-   Animação do boneco
-   
+   *  Animação do boneco
+   *  Vida
+   *  Objeto
+   *  Animação do boneco
+   *  Trocar alert por modal
+   * Ao clicar no boneco,abrirá o menu
  Padronizar
  - Ajetar a tela para todos os celulares e Webq
 Linguagem e Tela para todos os andares

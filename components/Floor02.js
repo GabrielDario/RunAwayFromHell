@@ -30,7 +30,6 @@ export function Floor02({navigation}) {
     }
     if (direction == 'right') {
       if (room == 1) {
-        changeRoom(3);
         setRoom(3);
       } else if(room == 2) {
         nextFloor(3);
