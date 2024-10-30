@@ -1,17 +1,22 @@
-import { ModelRoom, setModalVisible,modalVisible ,openRoom} from './ModelRoom.js';
+import { ModelRoom, setModalVisible, modalVisible, openRoom } from './ModelRoom.js';
 import React, { useState } from 'react';
 
 
-export function Floor01({navigation}) {
+export function Floor01({ navigation }) {
+  const [openRoom, setOpenRoom] = useState(false);
+
   const [room, setRoom] = useState(1);
   const [actionPhrase, setActionPhrase] = useState("NULL");
   let floor = 1;
   let background = require("../img/Floor01.png");
 
 
-  const handleConfirm = (direction, openRoom) => {
-    console.log('FLOOR1: ' + openRoom)
-    if (direction == 'left') {
+  const handleConfirm = (direct) => {
+    if(openRoom == true) {
+      navigation.navigate('Floor02')
+    }
+    
+    if (direct == 'left') {
       if (room == 1) {
         setRoom(2)
         setActionPhrase("Você estando indo para a sala 2");
@@ -19,7 +24,7 @@ export function Floor01({navigation}) {
         setActionPhrase("Não há nada aqui")
       }
     }
-    if (direction == 'right') {
+    if (direct == 'right') {
       if (room == 1) {
         setActionPhrase("Não há nada aqui")
       } else {
@@ -27,19 +32,17 @@ export function Floor01({navigation}) {
         setActionPhrase("Você estando indo para a sala 1");
       }
     }
-    if (direction == 'north') {
+    if (direct == 'north') {
       if (room == 1) {
         setActionPhrase("Você morreu e foi para sala 1");
       } else {
         setActionPhrase("Não há nada aqui");
       }
     }
-      if (direction == 'south') {
-        if (room == 1) {
-          setActionPhrase("VOCÊ CONSEGUIU ACHAR A PORTA! VOCÊ VAI PARA O PRÓXIMO ANDAR");
-          if(openRoom == true) {
-            navigation.navigate('Floor02')
-          }
+    if (direct == 'south') {
+      if (room == 1) {
+        setActionPhrase("VOCÊ CONSEGUIU ACHAR A PORTA! VOCÊ VAI PARA O PRÓXIMO ANDAR");
+        setOpenRoom(true)
       } else {
         setRoom(1)
         setActionPhrase("VOCÊ FOI MORTO E FOI PARA SALA 1");
@@ -57,6 +60,7 @@ export function Floor01({navigation}) {
       modalVisible={modalVisible}
       actionPhrase={actionPhrase}
       openRoom={openRoom}
+      setOpenRoom={setOpenRoom}
     />
   );
 }

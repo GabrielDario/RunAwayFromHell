@@ -37,7 +37,8 @@ OPÇÕES
 - Botar moto dinamico
 ----------------------------------------------------
 Daily 
-- Trocando de página ao clicar okay...
+- Trocando de página ao clicar okay...FEITO
+- Fazer segundo andar conformes o primeiro base
 
 - Fazer
    *  Animação do boneco

@@ -1,15 +1,12 @@
 import { StyleSheet, Text, View, ImageBackground, Image, Pressable, Modal } from 'react-native'
 import { useState } from 'react';
 
-export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase }) => {
+export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase,openRoom }) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const [openRoom, setOpenRoom] = useState(false);
-    const handleOkPress = (direction) => {
-        console.log('MODEL: ' + openRoom)
-        if(direction == 'south' && room == 1) {
-            console.log('SUBIU!')
-            setOpenRoom(true)
-            handleConfirm(direction,openRoom)
+    
+    const checkOpen = (direction) => {
+        if(openRoom) {
+            handleConfirm(direction)
         }
     };
     return (
@@ -18,7 +15,7 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
 
             <ImageBackground source={background} resizeMode="cover">
                 <View>
-                    <Text style={styles.title}>Andar : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
+                    <Text style={styles.title}>Andarr : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
                     <Text style={styles.title}>Sala: <Text style={styles.subtitle}>{room}</Text></Text>
                     <View style={styles.fundo}>
                         <Image source={require('../img/caractherFront.png')} style={styles.caracter} />
@@ -34,7 +31,7 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
                                     <Text style={styles.modalText}>{actionPhrase}</Text>
                                     <Pressable
                                         style={[styles.button, styles.buttonClose]}
-                                        onPress={() => { handleOkPress('south'); setModalVisible(!modalVisible) }}
+                                        onPress={() => { checkOpen(); setModalVisible(!modalVisible) }}
                                         >
                                         <Text style={styles.textStyle}>OK</Text>
                                     </Pressable>
@@ -49,7 +46,7 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
                     <Image source={require('../img/doorN.png')} style={styles.imagem} />
                 </Pressable>
 
-                <Pressable onPress={() => { handleOkPress('south'); setModalVisible(true); }}
+                <Pressable onPress={() => { handleConfirm('south'); setModalVisible(true); }}
                     style={[styles.imagem, styles.bottomImage]} >
                     <Image source={require('../img/doorS.png')} style={styles.imagem} />
                 </Pressable>
