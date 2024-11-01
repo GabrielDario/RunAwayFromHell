@@ -1,4 +1,4 @@
-import { ModelRoom, setModalVisible, modalVisible, openRoom } from './ModelRoom.js';
+import { ModelRoom, setModalVisible, modalVisible } from './ModelRoom.js';
 import React, { useState } from 'react';
 
 
@@ -21,7 +21,7 @@ export function Floor01({ navigation }) {
         setRoom(2)
         setActionPhrase("Você estando indo para a sala 2");
       } else {
-        setActionPhrase("Não há nada aqui")
+        setActionPhrase("Não há nada aqui");
       }
     }
     if (direct == 'right') {

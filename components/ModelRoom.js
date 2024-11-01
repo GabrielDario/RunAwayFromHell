@@ -15,8 +15,12 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
 
             <ImageBackground source={background} resizeMode="cover">
                 <View>
-                    <Text style={styles.title}>Andarr : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
+                    <Text style={styles.title}>Andar : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
                     <Text style={styles.title}>Sala: <Text style={styles.subtitle}>{room}</Text></Text>
+                    <Text style={styles.title}>
+                        <Text>openRoom :</Text>
+                        {openRoom ? <Text>True</Text> : <Text>False</Text>}
+                    </Text>
                     <View style={styles.fundo}>
                         <Image source={require('../img/caractherFront.png')} style={styles.caracter} />
                         <Modal

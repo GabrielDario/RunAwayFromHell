@@ -38,7 +38,7 @@ OPÇÕES
 ----------------------------------------------------
 Daily 
 - Trocando de página ao clicar okay...FEITO
-- Fazer segundo andar conformes o primeiro base
+- Fazer segundo andar conformes o primeiro base  
 
 - Fazer
    *  Animação do boneco
