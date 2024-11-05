@@ -1,41 +1,42 @@
+
 const actions = {
-    north: {
-      1: () => { /* ação para north, room 1 */ },
-      2: () => { /* ação para north, room 2 */ },
-      3: () => { /* ação para north, room 3 */ },
-      4: () => { /* ação para north, room 4 */ },
-      default: () => { /* ação padrão para north */ }
-    },
-    south: {
-      1: () => { /* ação para south, room 1 */ },
-      2: () => { /* ação para south, room 2 */ },
-      3: () => { /* ação para south, room 3 */ },
-      4: () => { /* ação para south, room 4 */ },
-      default: () => { /* ação padrão para south */ }
-    },
-    left: {
-      1: () => { /* ação para left, room 1 */ },
-      2: () => { /* ação para left, room 2 */ },
-      3: () => { /* ação para left, room 3 */ },
-      4: () => { /* ação para left, room 4 */ },
-      default: () => { /* ação padrão para left */ }
-    },
-    right: {
-      1: () => { /* ação para right, room 1 */ },
-      2: () => { /* ação para right, room 2 */ },
-      3: () => { /* ação para right, room 3 */ },
-      4: () => { /* ação para right, room 4 */ },
-      default: () => { /* ação padrão para right */ }
-    }
-  };
-  
+  north: {
+    1: (carry) => { carry.push(2, "Você estando indo para a sala 2") },
+    2: (carry) => { carry.push(2, "Não há nada aqui") },
+    3: (carry) => { carry.push(3, "Não há nada aqui") },
+    4: (carry) => { carry.push(5, "Você estando indo para a sala 5") },
+    5: (carry) => { carry.push(5, "Não há nada aqui") }
+  },
+  south: {
+    1: (carry) => { carry.push(1, "Não há nada aqui") },
+    2: (carry) => { carry.push(1, "Você estando indo para a sala 1") },
+    3: (carry) => { carry.push(3, "Não há nada aqui") },
+    4: (carry) => { carry.push(4, "Não há nada aqui") },
+    5: (carry) => { carry.push(4, "Você estando indo para a sala 4") }
+  },
+  left: {
+    1: (carry) => { carry.push(4, "Você estando indo para a sala 4") },
+    2: (carry) => {  carry.push(1, "VOCÊ MORREU E VOLTARÁ PARA A SALA 1!")},
+    3: (carry) => { carry.push(1, "Você estando indo para a sala 1") },
+    4: (carry) => { carry.push(4, "Não há nada aqui") },
+    5: (carry) => {  carry.push(1, "VOCÊ MORREU E VOLTARÁ PARA A SALA 1!")}
+  },
+  right: {
+    1: (carry) => { carry.push(3, "Você estando indo para a sala 3") },
+    2: (carry) => { carry.push(2, 'VOCÊ FOI PARA O PRÓXIMO ANDAR!',true) },
+    3: (carry) => {  carry.push(1, "VOCÊ MORREU E VOLTARÁ PARA A SALA 1!") },
+    4: (carry) => { carry.push(1, "Você estando indo para a sala 1") },
+    5: (carry) => { carry.push(1, "VOCÊ MORREU E VOLTARÁ PARA A SALA 1!")}
+  }
+};
+
 
 const executeAction = (direct, room) => {
-    console.log(`${direct} ${room}`);
-    if (actions[direct]) {
-        (actions[direct][room] || actions[direct].default)();
-      }
-    console.log(actions)
-  };
-  
-  export default { executeAction };
+  let carry = []
+  if (actions[direct]) {
+    (actions[direct][room] || actions[direct].default)(carry);
+  }
+  return carry
+};
+
+export default { executeAction };

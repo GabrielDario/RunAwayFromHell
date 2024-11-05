@@ -1,13 +1,9 @@
 import { ModelRoom, setModalVisible, modalVisible } from './ModelRoom.js';
-import React, { useState,useEffect } from 'react';
-import { executeAction} from '../path/Actions.js';
+import React, { useState } from 'react';
+import Actions from '../path/Actions.js';
 
 export function Floor02({ navigation }) {
-
-  useEffect(() => {
-    console.log('Segundo andar...')
-    setOpenRoom(false)
-  }, );
+  
 
   const [openRoom, setOpenRoom] = useState(false);
 
@@ -18,10 +14,17 @@ export function Floor02({ navigation }) {
 
 
   const handleConfirm = (direct) => {
-    if(openRoom == true) {
+    console.log('Conferindo...')
+    if (openRoom == true) {
       navigation.navigate('Floor03')
     }
-    Actions.executeAction(direct, room);
+
+    let retorno = Actions.executeAction(direct, room);
+    if(retorno[2] == true) {
+      setOpenRoom(true);
+    }
+    setRoom(retorno[0])
+    setActionPhrase(retorno[1]);
   };
 
   return (

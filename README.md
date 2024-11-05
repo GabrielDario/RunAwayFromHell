@@ -38,7 +38,10 @@ OPÇÕES
 ----------------------------------------------------
 Daily 
 - Trocando de página ao clicar okay...FEITO
-- Fazer segundo andar conformes o primeiro base  
+- Fazer segundo andar conformes o primeiro base... Feito
+    * Decidindo se vou botar caminhos em uma página ou separado! ... Feito 
+Agora
+- Terceiro andar com validação de objetos
 
 - Fazer
    *  Animação do boneco
