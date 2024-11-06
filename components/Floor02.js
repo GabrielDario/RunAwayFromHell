@@ -3,10 +3,8 @@ import React, { useState } from 'react';
 import Actions from '../path/Actions.js';
 
 export function Floor02({ navigation }) {
-  
 
   const [openRoom, setOpenRoom] = useState(false);
-
   const [room, setRoom] = useState(1);
   const [actionPhrase, setActionPhrase] = useState("NULL");
   let floor = 2;
@@ -14,17 +12,16 @@ export function Floor02({ navigation }) {
 
 
   const handleConfirm = (direct) => {
-    console.log('Conferindo...')
     if (openRoom == true) {
       navigation.navigate('Floor03')
     }
 
-    let retorno = Actions.executeAction(direct, room);
-    if(retorno[2] == true) {
+    let retorn = Actions.executeAction(direct, room);
+    if(retorn[2] == true) {
       setOpenRoom(true);
     }
-    setRoom(retorno[0])
-    setActionPhrase(retorno[1]);
+    setRoom(retorn[0])
+    setActionPhrase(retorn[1]);
   };
 
   return (

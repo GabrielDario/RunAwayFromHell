@@ -1,7 +1,16 @@
 import { StyleSheet, Text, View, ImageBackground, Image, Pressable, Modal } from 'react-native'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
-export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase,openRoom }) => {
+export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase,openRoom ,life}) => {
+    useEffect(() => {
+      explainRoom();
+      }, []);
+
+      const explainRoom = () => {
+        if(floor == 3) {
+           setModalVisible(true);
+        }
+      }
     const [modalVisible, setModalVisible] = useState(false);
     
     const checkOpen = (direction) => {
@@ -17,10 +26,12 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
                 <View>
                     <Text style={styles.title}>Andar : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
                     <Text style={styles.title}>Sala: <Text style={styles.subtitle}>{room}</Text></Text>
-                    <Text style={styles.title}>
-                        <Text>openRoom :</Text>
-                        {openRoom ? <Text>True</Text> : <Text>False</Text>}
-                    </Text>
+                    {life >= 0 ? 
+                    <Text style={styles.title}>Vida : 
+                    <Text style={styles.subtitle}>{life}</Text></Text>
+                    
+                    : <></>}
+                 
                     <View style={styles.fundo}>
                         <Image source={require('../img/caractherFront.png')} style={styles.caracter} />
                         <Modal
