@@ -16,11 +16,11 @@ export function Floor02({ navigation }) {
       navigation.navigate('Floor03')
     }
 
-    let retorn = Actions.executeAction(direct, room);
+    let retorn = Actions.executeAction(direct, room,floor);
     if(retorn[2] == true) {
       setOpenRoom(true);
     }
-    setRoom(retorn[0])
+    setRoom(retorn[0]);
     setActionPhrase(retorn[1]);
   };
 

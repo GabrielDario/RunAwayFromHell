@@ -1,20 +1,20 @@
 import { StyleSheet, Text, View, ImageBackground, Image, Pressable, Modal } from 'react-native'
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase,openRoom ,life}) => {
+export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase, openRoom, life }) => {
     useEffect(() => {
-      explainRoom();
-      }, []);
+        explainRoom();
+    }, []);
 
-      const explainRoom = () => {
-        if(floor == 3) {
-           setModalVisible(true);
+    const explainRoom = () => {
+        if (floor == 3) {
+            setModalVisible(true);
         }
-      }
+    }
     const [modalVisible, setModalVisible] = useState(false);
-    
+
     const checkOpen = (direction) => {
-        if(openRoom) {
+        if (openRoom) {
             handleConfirm(direction)
         }
     };
@@ -24,14 +24,29 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
 
             <ImageBackground source={background} resizeMode="cover">
                 <View>
-                    <Text style={styles.title}>Andar : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
-                    <Text style={styles.title}>Sala: <Text style={styles.subtitle}>{room}</Text></Text>
-                    {life >= 0 ? 
-                    <Text style={styles.title}>Vida : 
-                    <Text style={styles.subtitle}>{life}</Text></Text>
-                    
-                    : <></>}
-                 
+                    <View style={styles.status}>
+                        <Text style={styles.title}>Andarr : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
+                        <Text style={styles.title}>Sala: <Text style={styles.subtitle}>{room}</Text></Text>
+                        {floor >= 3 ?
+                            <>
+                                <Text style={styles.title}>Vida :<Text style={styles.subtitle}>{life}</Text></Text>
+                                <Text style={styles.title}>Objetos :</Text>
+                                <Text style={styles.object}>
+                                    <Image source={require('../img/pickaxe.png')} />
+                                </Text>
+                            </>
+
+
+                            : <></>
+                        }
+                    </View>
+                    {/* ------------------- */}
+                    <View style={styles.statusLeft}>
+                        <Image source={require('../img/cure.png')} />
+                        {/* <br> </br> */}
+                        <Image source={require('../img/magGlass.png')} />
+                    </View>
+
                     <View style={styles.fundo}>
                         <Image source={require('../img/caractherFront.png')} style={styles.caracter} />
                         <Modal
@@ -47,7 +62,7 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
                                     <Pressable
                                         style={[styles.button, styles.buttonClose]}
                                         onPress={() => { checkOpen(); setModalVisible(!modalVisible) }}
-                                        >
+                                    >
                                         <Text style={styles.textStyle}>OK</Text>
                                     </Pressable>
                                 </View>
@@ -106,6 +121,21 @@ const styles = StyleSheet.create({
     caracter: {
         height: 140,
         width: 85,
+        // bottom: 00
+    },
+    status: {
+        flexDirection: 'column'
+    },
+    statusLeft: {
+        right : 25,
+        top: 50,
+        position: 'absolute'
+    },
+    object: {
+        // backgroundColor: 'red',
+        width: 175,
+        height: 175,
+        top: 25
     },
     imagem: {
         width: 175,
@@ -113,7 +143,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
     },
     topImage: {
-        top: 150,
+        top: 50,
         left: 125,
     },
     bottomImage: {

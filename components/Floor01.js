@@ -14,7 +14,7 @@ export function Floor01({ navigation }) {
   const handleConfirm = (direct) => {
     if(openRoom == true) {
       // navigation.navigate('Floor02')
-       navigation.navigate('Floor03')
+       navigation.navigate('Floor02');
     }
     
     if (direct == 'left') {

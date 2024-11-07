@@ -1,6 +1,6 @@
 import { ModelRoom, setModalVisible } from './ModelRoom.js';
 import React, { useState,useEffect} from 'react';
-// import Actions from '../path/Actions.js';
+import Actions from '../path/Actions.js';
 
 
 export function Floor03({navigation}) {
@@ -25,8 +25,17 @@ export function Floor03({navigation}) {
                     + "\nNova opção: VASCULHAR SALA");
   }
 
-  const handleConfirm = (direction) => {
+  const handleConfirm = (direct) => {
+    if (openRoom == true) {
+      navigation.navigate('Floor03')
+    }
 
+    let retorn = Actions.executeAction(direct, room,floor);
+    if(retorn[2] == true) {
+      setOpenRoom(true);
+    }
+    setRoom(retorn[0]);
+    setActionPhrase(retorn[1]);
   };
 
   return (
