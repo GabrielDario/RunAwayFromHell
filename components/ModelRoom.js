@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ImageBackground, Image, Pressable, Modal } from 'react-native'
 import { useState, useEffect } from 'react';
 
-export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase, openRoom, life }) => {
+export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase, openRoom, life, checkRoom }) => {
     useEffect(() => {
         explainRoom();
     }, []);
@@ -25,7 +25,7 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
             <ImageBackground source={background} resizeMode="cover">
                 <View>
                     <View style={styles.status}>
-                        <Text style={styles.title}>Andarr : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
+                        <Text style={styles.title}>Andar : <Text style={styles.subtitle}>{floor}/10</Text> </Text>
                         <Text style={styles.title}>Sala: <Text style={styles.subtitle}>{room}</Text></Text>
                         {floor >= 3 ?
                             <>
@@ -43,8 +43,9 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
                     {/* ------------------- */}
                     <View style={styles.statusLeft}>
                         <Image source={require('../img/cure.png')} />
-                        {/* <br> </br> */}
-                        <Image source={require('../img/magGlass.png')} />
+                        <Pressable onPress={() => { checkRoom(room); setModalVisible(true) }}>
+                            <Image source={require('../img/magGlass.png')} style={styles.glass} />
+                        </Pressable>
                     </View>
 
                     <View style={styles.fundo}>
@@ -127,9 +128,12 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     statusLeft: {
-        right : 25,
+        right: 25,
         top: 50,
-        position: 'absolute'
+        position: 'absolute',
+    },
+    glass: {
+        marginTop: 50
     },
     object: {
         // backgroundColor: 'red',
