@@ -1,11 +1,27 @@
 import { StyleSheet, Text, View, ImageBackground, Image, Pressable, Modal } from 'react-native'
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext  } from 'react';
+export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase, setActionPhrase, openRoom,
+    checkRoom, axe }) => {
 
-export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase, openRoom, life, checkRoom }) => {
+    const [life, setLife] = useState(100);
+    const [bandAid, setBandAid] = useState(0);
+    const [bandAidCheck, setBandAidCheck] = useState(false);
+
     useEffect(() => {
         explainRoom();
     }, []);
 
+    const healing = () => {
+        if (bandAid == 0) {
+            setActionPhrase('Você não tem cura!\nVasculhe para achar mais!');
+        } else {
+            setActionPhrase('Você se cura com 40 de vida!');
+            setLife(life + 40)
+            if(life >= 100) {
+                setLife(100);
+            }
+        }
+    }
     const explainRoom = () => {
         if (floor == 3) {
             setModalVisible(true);
@@ -31,8 +47,11 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
                             <>
                                 <Text style={styles.title}>Vida :<Text style={styles.subtitle}>{life}</Text></Text>
                                 <Text style={styles.title}>Objetos :</Text>
+
                                 <Text style={styles.object}>
-                                    <Image source={require('../img/pickaxe.png')} />
+                                    {
+                                        axe ? <Image source={require('../img/axe.png')} /> : <></>
+                                    }
                                 </Text>
                             </>
 
@@ -41,12 +60,17 @@ export const ModelRoom = ({ background, floor, room, handleConfirm, actionPhrase
                         }
                     </View>
                     {/* ------------------- */}
-                    <View style={styles.statusLeft}>
-                        <Image source={require('../img/cure.png')} />
+                    {floor >= 3 ? <View style={styles.statusLeft}>
+                        <Pressable onPress={() => { healing(life); setModalVisible(true) }}>
+                            <Image source={require('../img/cure.png')} />
+                        </Pressable>
+                        <Text style={styles.subtitleLife}> {bandAid} Cura(s) </Text>
+
                         <Pressable onPress={() => { checkRoom(room); setModalVisible(true) }}>
                             <Image source={require('../img/magGlass.png')} style={styles.glass} />
                         </Pressable>
-                    </View>
+                    </View> : <></>}
+
 
                     <View style={styles.fundo}>
                         <Image source={require('../img/caractherFront.png')} style={styles.caracter} />
@@ -113,6 +137,11 @@ const styles = StyleSheet.create({
     subtitle: {
         color: 'red',
         fontSize: 25,
+    },
+    subtitleLife: {
+        color: 'rgb(0,255,0)',
+        fontSize: 25,
+        fontWeight: 'bold',
     },
     fundo: {
         alignItems: 'center',
